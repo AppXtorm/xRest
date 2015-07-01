@@ -1,7 +1,10 @@
 package com.ikeda.service;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
+
 import com.ikeda.jdbc.SQLSessionFactory;
 import com.ikeda.model.Empresa;
 
@@ -24,6 +27,28 @@ public class EmpresaService {
 		}
 		
 	}
+		
+	public static List<Empresa> getCompaniesByName(String name){
+		
+		List<Empresa> companies = new ArrayList<Empresa>();
+		Empresa emp = new Empresa();
+		emp.setNome(name);
+		try{
+			SqlSession session = SQLSessionFactory.getSqlSessionFactory().openSession();
+			
+			
+			companies = session.selectList("getCompaniesByName", emp);
+		
+			session.commit();
+			session.close();
+		
+			return companies;
+		}catch(Exception e){
+			System.out.println(e);
+			return companies;
+		}		
+	}
+
 	
 	public static Boolean registerCompany(Empresa empresa) {
 		int inserted;
@@ -42,6 +67,8 @@ public class EmpresaService {
 			System.out.println("EmpresaService: " + e);
 			return false;
 		}
-		
 	}
-}
+	
+	
+	}
+

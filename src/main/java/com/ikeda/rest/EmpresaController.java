@@ -82,19 +82,21 @@ public class EmpresaController {
 	@Path("/byname")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCompanyByName(@QueryParam("nome") String nome){
-		List<Empresa> empresas = null;
+	public Response getCompanyByName(@QueryParam("name") String name){
+		List<Empresa> companies = null;
+		System.out.println(name); 
 		
 		try{
-			empresas = EmpresaService.getEmpresasByCep(nome);
+			companies = EmpresaService.getCompaniesByName(name);
 		}catch(Exception e){
 			return Response.status(500).entity("{}").build();
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("empresas", empresas);
+		map.put("empresas", companies);
 		
-		return Response.status(200).entity(map).build();
+		return Response.status(200).entity(companies).build();
+	
 	}
 	
 	
