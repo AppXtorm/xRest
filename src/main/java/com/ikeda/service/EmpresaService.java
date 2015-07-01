@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.ikeda.jdbc.SQLSessionFactory;
 import com.ikeda.model.Empresa;
+import com.ikeda.model.EmpresaHorario;
 
 public class EmpresaService {
 
@@ -67,6 +68,21 @@ public class EmpresaService {
 			System.out.println("EmpresaService: " + e);
 			return false;
 		}
+	}
+	
+	public static List<EmpresaHorario> getCompanySchedule(String cnpj){
+		List<EmpresaHorario> schedule = new ArrayList<EmpresaHorario>();
+		try{
+			SqlSession session = SQLSessionFactory.getSqlSessionFactory().openSession();
+			
+			schedule = session.selectList("getCompanySchedule", cnpj);
+			session.commit();
+			session.close();			
+			
+		}catch(Exception e){
+			System.out.println(e);			
+		}
+		return schedule;
 	}
 	
 	

@@ -17,6 +17,7 @@
 <mappers>
     <mapper class="com.ikeda.mapper.EmpresaMapper"/>
     <mapper class="com.ikeda.mapper.UsuarioMapper"/>  
+    <mapper class="com.ikeda.mapper.EmpresaHorarioMapper"/>
 </mappers>
 
 

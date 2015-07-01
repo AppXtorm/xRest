@@ -18,6 +18,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.ikeda.jdbc.SQLSessionFactory;
 import com.ikeda.model.Empresa;
+import com.ikeda.model.EmpresaHorario;
 import com.ikeda.service.EmpresaService;
 
 @Path("/company/")
@@ -44,7 +45,7 @@ public class EmpresaController {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response registerCompany(Empresa empresa){
+	public Response registerCompan(Empresa empresa){
 		Boolean registered;
 		
 		try {
@@ -83,9 +84,7 @@ public class EmpresaController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCompanyByName(@QueryParam("name") String name){
-		List<Empresa> companies = null;
-		System.out.println(name); 
-		
+		List<Empresa> companies = null;			
 		try{
 			companies = EmpresaService.getCompaniesByName(name);
 		}catch(Exception e){
@@ -96,9 +95,30 @@ public class EmpresaController {
 		map.put("empresas", companies);
 		
 		return Response.status(200).entity(companies).build();
-	
 	}
 	
+	
+	@Path("/schedule")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response registerCompanySchedule(@QueryParam("cnpj") String cnpj){
+		List<EmpresaHorario> schedule = null;
+		
+		try{
+			schedule = EmpresaService.getCompanySchedule(cnpj);
+		}catch(Exception e){
+			return Response.status(500).entity("{}").build();
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("horarios", schedule);		
+		return Response.status(200).entity(schedule).build();
+	}
+	
+	
+
+	
+		
 	
 	
 	
