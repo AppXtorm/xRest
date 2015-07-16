@@ -15,7 +15,7 @@ public interface EmpresaMapper {
 	
 	static String CADASTRAR_EMPRESA = "INSERT INTO Empresa (cnpj, nome, cep) VALUES (#{cnpj}, #{nome}, #{cep})";
 	
-	
+	/* Busca as empresas de um determinado CEP */
 	@Select(GET_COMPANIES_BY_CEP)
 	public List<Empresa> getEmpresasByCep(String cep) throws Exception;
 	

@@ -18,7 +18,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.ikeda.jdbc.SQLSessionFactory;
 import com.ikeda.model.Empresa;
-import com.ikeda.model.EmpresaHorario;
+import com.ikeda.model.QuadraHorario;
 import com.ikeda.service.EmpresaService;
 
 @Path("/company/")
@@ -102,10 +102,10 @@ public class EmpresaController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response registerCompanySchedule(@QueryParam("cnpj") String cnpj){
-		List<EmpresaHorario> schedule = null;
+		List<QuadraHorario> schedule = null;
 		
 		try{
-			schedule = EmpresaService.getCompanySchedule(cnpj);
+			schedule = EmpresaService.getFieldSchedule(cnpj);
 		}catch(Exception e){
 			return Response.status(500).entity("{}").build();
 		}

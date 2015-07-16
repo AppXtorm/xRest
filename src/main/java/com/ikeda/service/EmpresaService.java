@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.ikeda.jdbc.SQLSessionFactory;
 import com.ikeda.model.Empresa;
-import com.ikeda.model.EmpresaHorario;
+import com.ikeda.model.QuadraHorario;
 
 public class EmpresaService {
 
@@ -70,12 +70,12 @@ public class EmpresaService {
 		}
 	}
 	
-	public static List<EmpresaHorario> getCompanySchedule(String cnpj){
-		List<EmpresaHorario> schedule = new ArrayList<EmpresaHorario>();
+	public static List<QuadraHorario> getFieldSchedule(String cnpj){
+		List<QuadraHorario> schedule = new ArrayList<QuadraHorario>();
 		try{
 			SqlSession session = SQLSessionFactory.getSqlSessionFactory().openSession();
 			
-			schedule = session.selectList("getCompanySchedule", cnpj);
+			schedule = session.selectList("getFieldSchedule", cnpj);
 			session.commit();
 			session.close();			
 			
